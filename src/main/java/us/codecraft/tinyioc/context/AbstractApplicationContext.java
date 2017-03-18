@@ -16,8 +16,12 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
 	}
 
 	public void refresh() throws Exception {
+		//加载BeanDefinition，通常由子类实现
+		//通过ResourceLoader得到BeanDefinitionReader，然后再beanDefinitionMap注册
 		loadBeanDefinitions(beanFactory);
+		//在beanPostProcessors注册
 		registerBeanPostProcessors(beanFactory);
+		//以单例的方式初始化bean
 		onRefresh();
 	}
 

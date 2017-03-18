@@ -22,6 +22,7 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
 	public ClassPathXmlApplicationContext(String configLocation, AbstractBeanFactory beanFactory) throws Exception {
 		super(beanFactory);
 		this.configLocation = configLocation;
+		//这个方法构建了Bean关系网
 		refresh();
 	}
 

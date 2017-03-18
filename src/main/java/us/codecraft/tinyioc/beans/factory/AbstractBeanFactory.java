@@ -28,7 +28,14 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 		}
 		Object bean = beanDefinition.getBean();
 		if (bean == null) {
+			//通过beanDefinition创建实例
+			//a.createBeanInstance(beanDefinition);
+			//b.applyPropertyValues(bean, beanDefinition);
+			//b由子类AutowireCapableBeanFactory实现，如果BeanFactoryAware接口，这说明容器获得了bean的操作权利
+			//比如proxycreator，它先于其他类实例化，所以才能动态代理
 			bean = doCreateBean(beanDefinition);
+			//注入属性，取出beanPostProcessor，执行postProcessBeforeInitialization和After
+			//这么做可以实现aop注入
             bean = initializeBean(bean, name);
             beanDefinition.setBean(bean);
 		}
